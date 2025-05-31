@@ -3,7 +3,13 @@ pkgs.stdenv.mkDerivation {
   pname = "db-main";
   version = "1.0";
 
-  src = ./db-main;
+  #src = ./db-main;
+  src = builtins.fetchurl {
+    url = "https://projects.info.unamur.be/dbmain/files/dbm-1102-linux-amd64-setup.tar.gz";
+  };
+
+  umpackCmd = "tar -xzf $src";
+
   nativeBuildInputs = [
     pkgs.makeWrapper
     pkgs.patchelf
