@@ -4,7 +4,10 @@ pkgs.stdenv.mkDerivation {
   version = "1.0";
 
   #src = ./db-main;
-  src = builtins.fetchTarball "https://projects.info.unamur.be/dbmain/files/dbm-1102-linux-amd64-setup.tar.gz";
+  src = builtins.fetchTarball {
+    url = "https://projects.info.unamur.be/dbmain/files/dbm-1102-linux-amd64-setup.tar.gz";
+    sha256 = "8f61e6069337dc734ac6f886b224329ec943cd4dafbd888611bd806373cb3296";
+  };
 
   nativeBuildInputs = [
     pkgs.makeWrapper
