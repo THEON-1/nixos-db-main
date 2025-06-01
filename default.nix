@@ -12,6 +12,7 @@ pkgs.stdenv.mkDerivation {
   nativeBuildInputs = [
     pkgs.makeWrapper
     pkgs.patchelf
+    pkgs.cacert
   ];
 
   buildInputs = [
