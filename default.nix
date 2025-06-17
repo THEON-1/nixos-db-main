@@ -3,16 +3,16 @@ pkgs.stdenv.mkDerivation {
   pname = "db-main";
   version = "1.0";
 
-  #src = ./db-main;
-  src = builtins.fetchTarball {
+  src = pkgs.requireFile {
+    name = "dbm-1102-linux-amd64-setup.tar.gz";
     url = "https://projects.info.unamur.be/dbmain/files/dbm-1102-linux-amd64-setup.tar.gz";
-    sha256 = "8f61e6069337dc734ac6f886b224329ec943cd4dafbd888611bd806373cb3296";
+    hash = "sha256-j2HmBpM33HNKxviGsiQynslDzU2vvYiGEb2AY3PLMpY=";
   };
 
   nativeBuildInputs = [
     pkgs.makeWrapper
     pkgs.patchelf
-    pkgs.cacert
+    pkgs.gnutar
   ];
 
   buildInputs = [
@@ -33,14 +33,7 @@ pkgs.stdenv.mkDerivation {
 
   installPhase = ''
     mkdir $out
-    mkdir $out/bin
-    mkdir $out/doc
-    mkdir $out/java
-    mkdir $out/plugins
-    cp -r $src/bin/* $out/bin
-    cp -r $src/doc/* $out/doc
-    cp -r $src/java/* $out/java
-    cp -r $src/plugins/* $out/plugins
+    tar xf $src -C $out
 
     chmod +w $out/bin/db_main
 
